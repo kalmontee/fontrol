@@ -1,72 +1,81 @@
 // set any environment variables with the .env package
 var dotenv = require("dotenv").config();
-
-// Here we will require data from fs file package
+var keys = require("./keys.js");
+// for bands
+var moment = require("moment");
+moment().format();
+// for omdb
+var axios = require("axios");
+var spotify = require('node-spotify-api');
 var fs = require("fs");
 
-var keys = require("./keys.js");
-var axios = require("axios");
+var userInput = process.argv[2];
+var action = process.argv.slice(3).join(" ");
 
-// console.log(spotify);
-// var spotify = new Spotify(keys.spotify);
-
-var action = process.argv[2];
-var userInput = process.argv[3];
-
-// We will then create a switch-case statement (if-else would also work).
-// The switch-case will direct which function gets run.
-switch (action) {
+switch (action, userInput) {
     case "movie-this":
-        movie();
+        movie(action);
         break;
 
     case "spotify-this-song":
-        spotify();
+        spotify(action);
         break;
 
     case "concert-this":
-        bands();
+        bands(action);
         break;
 
     case "do-what-it-says":
-        whatItSays();
+        whatItSays(action);
         break;
 }
 
-var artist = "";
+function movie(movieName) {
 
-var bandsURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    if (!movieName) {
+        movieName = "Mr. Nobody";
+    }
 
-
-// axios.get(bandsURL).then(function(response) {
-//     console.log("The artist you're searching for is.. " + response);
-
-// });
-
-function movie() {
     var omdbURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-    var movieName = "";
 
     axios.get(omdbURL).then(function(response) {
         // console.log(response.data);
+        // console.log(JSON.stringify(data[0], null, 2));
 
-        console.log("-------------------------")
-            // Title of the movie
-        console.log(response.data.Title);
+        console.log("-------------------------");
+        // Title of the movie
+        console.log("Title: " + response.data.Title);
         // Year the movie came out.
-        console.log(response.data.Year);
+        console.log("Year: " + response.data.Year);
         // IMDB Rating of the movie.
-        console.log(response.data.imdbRating);
+        console.log("IMDB Ratings: " + response.data.imdbRating);
         // Rotten Tomatoes Rating of the movie.
-        // console.log(response.data)
+        console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
         // Country where the movie was produced.
-        console.log(response.data.Country);
+        console.log("Country: " + response.data.Country);
         // Language of the movie.
-        console.log(response.data.Language);
+        console.log("Language: " + response.data.Language);
         // Plot of the movie.
-        console.log(response.data.Plot);
+        console.log("Plot: " + response.data.Plot);
         // Actors in the movie.
-        console.log(response.data.Actors);
+        console.log("Actors: " + response.data.Actors);
         console.log("-------------------------")
+    });
+}
+
+// var artist = "";
+
+function bands() {
+    var bandsURL = "https://rest.bandsintown.com/artists/" + bandsName + "/events?app_id=codingbootcamp";
+
+    moment.get(bandsURL).then(function(response) {
+        console.log(response.data);
+
+        // Name of the venue
+        console.log(response.data.venue.name);
+        // Venue location
+        console.log(response.data.venue.country);
+        // Date of the Event(use moment to format this as "MM/DD/YYYY")
+        console.log(response.data.datetime);
     });
 }
