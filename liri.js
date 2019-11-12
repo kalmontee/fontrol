@@ -1,13 +1,11 @@
 // set any environment variables with the .env package
 var dotenv = require("dotenv").config();
 var keys = require("./keys.js");
-// for bands
-var moment = require("moment");
-moment().format();
-// for omdb
 var axios = require("axios");
 var spotify = require('node-spotify-api');
 var fs = require("fs");
+var moment = require("moment");
+moment().format();
 
 var userInput = process.argv[2];
 var action = process.argv.slice(3).join(" ");
@@ -39,8 +37,6 @@ function movie(movieName) {
     var omdbURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
     axios.get(omdbURL).then(function(response) {
-        // console.log(response.data);
-        // console.log(JSON.stringify(data[0], null, 2));
 
         console.log("-------------------------");
         // Title of the movie
@@ -59,23 +55,31 @@ function movie(movieName) {
         console.log("Plot: " + response.data.Plot);
         // Actors in the movie.
         console.log("Actors: " + response.data.Actors);
-        console.log("-------------------------")
+        console.log("-------------------------");
     });
 }
 
-// var artist = "";
+function bands(artistName) {
 
-function bands() {
-    var bandsURL = "https://rest.bandsintown.com/artists/" + bandsName + "/events?app_id=codingbootcamp";
+    var artistName = action;
+    var bandsURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
 
-    moment.get(bandsURL).then(function(response) {
-        console.log(response.data);
 
+    axios.get(bandsURL).then(function(response) {
+        console.log(response);
+
+        console.log("-------------------------");
         // Name of the venue
-        console.log(response.data.venue.name);
+        console.log("Name of the venue: " + response.data[0].venue.name);
         // Venue location
-        console.log(response.data.venue.country);
+        console.log("Venue location: " + response.data[0].venue.city);
         // Date of the Event(use moment to format this as "MM/DD/YYYY")
-        console.log(response.data.datetime);
+        console.log("Date of the Event " + moment(response.data.datetime).format("MM-DD-YYYY"));
+        console.log("-------------------------");
     });
 }
+
+// function spotify() {
+//     // placed the secret ID for spotify
+//     var spotify = new spotify(keys.spotify);
+// }
