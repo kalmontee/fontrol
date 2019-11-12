@@ -26,6 +26,9 @@ switch (userInput) {
     case "do-what-it-says":
         whatItSays(action);
         break;
+
+    default:
+        console.log("Please choose one of the following commands: 'movie-this', 'spotify-this-song', 'concert-this', 'do-what-it-says'.");
 }
 
 // omdb Movie function
@@ -63,7 +66,6 @@ function movie(movieName) {
 // Bands in Town function
 function bands(artistName) {
 
-    // var artistName = action;
     var bandsURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
 
     axios.get(bandsURL).then(function(response) {
@@ -98,9 +100,8 @@ function spotify(songName) {
 
         if (err) {
             return console.log(err);
-        }
 
-        if (!err) {
+        } else if (!err) {
             var songInfo = data.tracks.items;
 
             // loop through all song tracks
