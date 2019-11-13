@@ -8,23 +8,23 @@ var moment = require("moment");
 moment().format();
 
 var userInput = process.argv[2];
-var action = process.argv.slice(3).join(" ");
+var dataArr = process.argv.slice(3).join(" ");
 
 switch (userInput) {
     case "movie-this":
-        movie(action);
+        movie(dataArr);
         break;
 
     case "spotify-this-song":
-        spotify(action);
+        spotify(dataArr);
         break;
 
     case "concert-this":
-        bands();
+        bandsInTown(dataArr);
         break;
 
     case "do-what-it-says":
-        whatItSays(action);
+        whatItSays(dataArr);
         break;
 
     default:
@@ -40,46 +40,48 @@ function movie(movieName) {
 
     var omdbURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
-    axios.get(omdbURL).then(function(response) {
+    axios.get(omdbURL).then((response) => {
+        var results = response.data;
 
         console.log("============================");
         // Title of the movie
-        console.log("Title: " + response.data.Title);
+        console.log("Title: " + results.Title);
         // Year the movie came out.
-        console.log("Year: " + response.data.Year);
+        console.log("Year: " + results.Year);
         // IMDB Rating of the movie.
-        console.log("IMDB Ratings: " + response.data.imdbRating);
+        console.log("IMDB Ratings: " + results.imdbRating);
         // Rotten Tomatoes Rating of the movie.
-        console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
+        console.log(results.Ratings[1].Source + ": " + results.Ratings[1].Value);
         // Country where the movie was produced.
-        console.log("Country: " + response.data.Country);
+        console.log("Country: " + results.Country);
         // Language of the movie.
-        console.log("Language: " + response.data.Language);
+        console.log("Language: " + results.Language);
         // Plot of the movie.
-        console.log("Plot: " + response.data.Plot);
+        console.log("Plot: " + results.Plot);
         // Actors in the movie.
-        console.log("Actors: " + response.data.Actors);
+        console.log("Actors: " + results.Actors);
         console.log("============================");
     });
 }
 
 // Bands in Town function
-function bands(artistName) {
+function bandsInTown(artistName) {
 
     var bandsURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
 
-    axios.get(bandsURL).then(function(response) {
-        console.log(response);
+    axios.get(bandsURL).then(response => {
+        var results = response.data[0];
+        // console.log(results);
 
         console.log("============================");
         // Artist Name
-        console.log("Artist name " + response.data.artist);
+        console.log("Artist name: " + results.artist.name);
         // Name of the venue
-        console.log("Name of the venue: " + response.data[0].venue.name);
-        // Venue location
-        console.log("Venue location: " + response.data[0].venue.city);
-        // Date of the Event(use moment to format this as "MM/DD/YYYY")
-        console.log("Date of the Event " + moment(response.data.datetime).format("MM-DD-YYYY"));
+        console.log("Name of the venue: " + results.venue.name);
+        // // Venue location
+        console.log("Venue location: " + results.venue.city + ", " + results.venue.region + ", " + results.venue.country);
+        // // Date of the Event(use moment to format this as "MM/DD/YYYY")
+        console.log("Date of the Event: " + moment(results.datetime).format("MM-DD-YYYY"));
         console.log("============================");
     });
 }
@@ -89,14 +91,11 @@ function spotify(songName) {
     // placed the secret ID for spotify
     var spotify = new Spotify(keys.spotify);
 
-    // test
-    // console.log(spotify);
-
     spotify.search({
         type: "track",
         query: songName
 
-    }, function(err, data) {
+    }, (err, data) => {
 
         if (err) {
             return console.log(err);
