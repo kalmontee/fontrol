@@ -107,7 +107,7 @@ function spotify(songName) {
         }
 
         // Append spotify info to log.txt file
-        var logSpotify = `\n ============Spotify Song============ \n Artist name: ${songInfo[0].album.artists[0].name} \n Song name: ${songName} \n Preview song: ${songInfo[0].preview_url} \n Album name: ${songInfo[0].album.name} \n`
+        var logSpotify = `\n ============Spotify Song============ \n Artist name: ${songInfo.artists[0].name} \n Song name: ${songName} \n Preview song: ${songInfo.preview_url} \n Album name: ${songInfo.album.name} \n`
 
         // Append spotify songs to log.txt file
         fs.appendFile("log.txt", logSpotify, (err) => {
