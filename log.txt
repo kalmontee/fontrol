@@ -1,1 +1,40 @@
 
+ ============OMDB Movies============ 
+ Title: Black Panther 
+ Year: 2018 
+ IMDB Ratings: 7.3 Rotten Tomatoes: 97% 
+ Country: USA 
+ Language: English, Swahili, Nama, Xhosa, Korean 
+ Plot: T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past. 
+ Actors: Chadwick Boseman, Michael B. Jordan, Lupita Nyong'o, Danai Gurira 
+
+ ============OMDB Movies============ 
+ Title: Training Day 
+ Year: 2001 
+ IMDB Ratings: 7.7 Rotten Tomatoes: 72% 
+ Country: USA 
+ Language: English, Russian, Spanish, Korean, Greek 
+ Plot: On his first day on the job as a Los Angeles narcotics officer, a rookie cop goes beyond a full work day in training within the narcotics division of the L.A.P.D. with a rogue detective who isn't what he appears to be. 
+ Actors: Denzel Washington, Ethan Hawke, Scott Glenn, Tom Berenger 
+
+ ============Spotify Song============ 
+ Artist name: Green Day 
+ Song name: 21 Guns 
+ Preview song: https://p.scdn.co/mp3-preview/9139658121b115dac9d893ba0cbe537c9995b090?cid=dfd453455cc84b5ea5064ab8247358dc 
+ Album name: 21st Century Breakdown 
+
+ ============Spotify Song============ 
+ Artist name: Linkin Park 
+ Song name: New Divide 
+ Preview song: https://p.scdn.co/mp3-preview/0c37f247c285ab7ea69a6eb0a5cdfc544fd05c49?cid=dfd453455cc84b5ea5064ab8247358dc 
+ Album name: Transformers: Revenge Of The Fallen The Album 
+
+ ============Bands In Town============ 
+ Artist name: Ariana Grande 
+ Name of the venue: John Paul Jones Arena 
+ Venue location: Charlottesville, VA, United States, Date of the event: 11-15-2019 
+
+ ============Bands In Town============ 
+ Artist name: Lady Gaga 
+ Name of the venue: LADY GAGA ENIGMA 
+ Venue location: Las Vegas, NV, United States, Date of the event: 12-28-2019 
