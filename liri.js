@@ -44,10 +44,10 @@ function movie(movieName) {
         var results = response.data;
 
         // To view results in the terminal
-        console.log(`============================ \n Title: ${results.Title} \n Year: ${results.Year} \n IMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \n Country: ${results.Country} \n Language: ${results.Language} \n Plot: ${results.Plot} \n Actors: ${results.Actors} \n============================`);
+        console.log(`============================ \nTitle: ${results.Title} \nYear: ${results.Year} \nIMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \nCountry: ${results.Country} \nLanguage: ${results.Language} \nPlot: ${results.Plot} \nActors: ${results.Actors}\n============================`);
 
         // Log Bands in town to log.txt
-        var logMovies = `\n ============OMDB Movies============ \n Title: ${results.Title} \n Year: ${results.Year} \n IMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \n Country: ${results.Country} \n Language: ${results.Language} \n Plot: ${results.Plot} \n Actors: ${results.Actors} \n`;
+        var logMovies = `\n============OMDB Movies============ \nTitle: ${results.Title} \nYear: ${results.Year} \n IMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \nCountry: ${results.Country} \nLanguage: ${results.Language} \nPlot: ${results.Plot} \nActors: ${results.Actors} \n`;
 
         // Append Bands in Town songs to log.txt file
         fs.appendFile("log.txt", logMovies, (err) => {
@@ -67,10 +67,10 @@ function bandsInTown(artistName) {
         var results = response.data[0];
 
         // To view results in the terminal
-        console.log(`============================ \n Artist name: ${artistName} \n Name of the venue: ${results.venue.name}\n Venue location: ${results.venue.city}, ${results.venue.region}, ${results.venue.country} \n Date of the event: ${moment(results.datetime).format("MM-DD-YYYY")} \n ============================`);
+        console.log(`============================ \nArtist name: ${artistName} \nName of the venue: ${results.venue.name} \nVenue location: ${results.venue.city}, ${results.venue.region}, ${results.venue.country} \nDate of the event: ${moment(results.datetime).format("MM-DD-YYYY")} \n ============================`);
 
         // Log Bands in town to log.txt
-        var logBands = `\n ============Bands In Town============ \n Artist name: ${artistName} \n Name of the venue: ${response.data[0].venue.name} \n Venue location: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}, Date of the event: ${moment(response.data[0].datetime).format("MM-DD-YYYY")} \n`
+        var logBands = `\n============Bands In Town============ \nArtist name: ${artistName} \nName of the venue: ${response.data[0].venue.name} \n Venue location: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}, Date of the event: ${moment(response.data[0].datetime).format("MM-DD-YYYY")} \n`
 
         // Append Bands in Town songs to log.txt file
         fs.appendFile("log.txt", logBands, (err) => {
@@ -103,11 +103,11 @@ function spotify(songName) {
             var songInfo = data.tracks.items[0];
 
             // To view results in the terminal
-            console.log(`===========================\n Artist name: ${songInfo.artists[0].name}\n Song name: ${songName}\n Preview song: ${songInfo.preview_url} Preview son: ${songInfo.album.name}\n ===========================`);
+            console.log(`===========================\nArtist name: ${songInfo.artists[0].name} \nSong name: ${songName}\n Preview song: ${songInfo.preview_url} \nAlbum name: ${songInfo.album.name} \n===========================`);
         }
 
         // Append spotify info to log.txt file
-        var logSpotify = `\n ============Spotify Song============ \n Artist name: ${songInfo.artists[0].name} \n Song name: ${songName} \n Preview song: ${songInfo.preview_url} \n Album name: ${songInfo.album.name} \n`
+        var logSpotify = `\n============Spotify Song============ \nArtist name: ${songInfo.artists[0].name} \nSong name: ${songName} \nPreview song: ${songInfo.preview_url} \nAlbum name: ${songInfo.album.name} \n`
 
         // Append spotify songs to log.txt file
         fs.appendFile("log.txt", logSpotify, (err) => {
@@ -126,15 +126,9 @@ function whatItSays() {
 
         } else {
             console.log(data);
-        }
-    });
-}
-
-// Bonus section - Log resuts to log.txt file
-function logResults(data) {
-    fs.appendFile("log.txt", data, (err) => {
-        if (err) {
-            return console.log(err);
+            movie();
+            spotify();
+            bandsInTown();
         }
     });
 }
