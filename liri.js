@@ -43,24 +43,18 @@ function movie(movieName) {
     axios.get(omdbURL).then((response) => {
         var results = response.data;
 
-        console.log("============================");
-        // Title of the movie
-        console.log("Title: " + results.Title);
-        // Year the movie came out.
-        console.log("Year: " + results.Year);
-        // IMDB Rating of the movie.
-        console.log("IMDB Ratings: " + results.imdbRating);
-        // Rotten Tomatoes Rating of the movie.
-        console.log(results.Ratings[1].Source + ": " + results.Ratings[1].Value);
-        // Country where the movie was produced.
-        console.log("Country: " + results.Country);
-        // Language of the movie.
-        console.log("Language: " + results.Language);
-        // Plot of the movie.
-        console.log("Plot: " + results.Plot);
-        // Actors in the movie.
-        console.log("Actors: " + results.Actors);
-        console.log("============================");
+        // To view results in the terminal
+        console.log(`============================ \n Title: ${results.Title} \n Year: ${results.Year} \n IMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \n Country: ${results.Country} \n Language: ${results.Language} \n Plot: ${results.Plot} \n Actors: ${results.Actors} \n============================`);
+
+        // Log Bands in town to log.txt
+        var logMovies = `\n ============OMDB Movies============ \n Title: ${results.Title} \n Year: ${results.Year} \n IMDB Ratings: ${results.imdbRating} ${results.Ratings[1].Source}: ${results.Ratings[1].Value} \n Country: ${results.Country} \n Language: ${results.Language} \n Plot: ${results.Plot} \n Actors: ${results.Actors} \n`;
+
+        // Append Bands in Town songs to log.txt file
+        fs.appendFile("log.txt", logMovies, (err) => {
+            if (err) {
+                return console.log(err);
+            }
+        });
     });
 }
 
@@ -71,18 +65,19 @@ function bandsInTown(artistName) {
 
     axios.get(bandsURL).then(response => {
         var results = response.data[0];
-        // console.log(results);
 
-        console.log("============================");
-        // Artist Name
-        console.log("Artist name: " + results.artist.name);
-        // Name of the venue
-        console.log("Name of the venue: " + results.venue.name);
-        // // Venue location
-        console.log("Venue location: " + results.venue.city + ", " + results.venue.region + ", " + results.venue.country);
-        // // Date of the Event(use moment to format this as "MM/DD/YYYY")
-        console.log("Date of the Event: " + moment(results.datetime).format("MM-DD-YYYY"));
-        console.log("============================");
+        // To view results in the terminal
+        console.log(`============================ \n Artist name: ${artistName} \n Name of the venue: ${results.venue.name}\n Venue location: ${results.venue.city}, ${results.venue.region}, ${results.venue.country} \n Date of the event: ${moment(results.datetime).format("MM-DD-YYYY")} \n ============================`);
+
+        // Log Bands in town to log.txt
+        var logBands = `\n ============Bands In Town============ \n Artist name: ${artistName} \n Name of the venue: ${response.data[0].venue.name} \n Venue location: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}, Date of the event: ${moment(response.data[0].datetime).format("MM-DD-YYYY")} \n`
+
+        // Append Bands in Town songs to log.txt file
+        fs.appendFile("log.txt", logBands, (err) => {
+            if (err) {
+                return console.log(err);
+            }
+        });
     });
 }
 
@@ -90,6 +85,10 @@ function bandsInTown(artistName) {
 function spotify(songName) {
     // placed the secret ID for spotify
     var spotify = new Spotify(keys.spotify);
+
+    if (!songName) {
+        songName = "The Sign";
+    }
 
     spotify.search({
         type: "track",
@@ -101,18 +100,41 @@ function spotify(songName) {
             return console.log(err);
 
         } else if (!err) {
-            var songInfo = data.tracks.items;
+            var songInfo = data.tracks.items[0];
 
-            // loop through all song tracks
-            for (var i = 0; i < songInfo.length; i++) {
-                // iterate though all song infos
-                songInfo[i];
-                console.log("============================");
-                console.log("Artist name: " + songInfo[i].artists[0].name);
-                console.log("Song name: " + songInfo[i].name);
-                console.log("Preview song " + songInfo[i].preview_url);
-                console.log("Album " + songInfo[i].album.name);
+            // To view results in the terminal
+            console.log(`===========================\n Artist name: ${songInfo.artists[0].name}\n Song name: ${songName}\n Preview song: ${songInfo.preview_url} Preview son: ${songInfo.album.name}\n ===========================`);
+        }
+
+        // Append spotify info to log.txt file
+        var logSpotify = `\n ============Spotify Song============ \n Artist name: ${songInfo[0].album.artists[0].name} \n Song name: ${songName} \n Preview song: ${songInfo[0].preview_url} \n Album name: ${songInfo[0].album.name} \n`
+
+        // Append spotify songs to log.txt file
+        fs.appendFile("log.txt", logSpotify, (err) => {
+            if (err) {
+                return console.log(err);
             }
+        });
+    });
+}
+
+// Do what it says function
+function whatItSays() {
+    fs.readFile("random.txt", "utf8", (err, data) => {
+        if (err) {
+            return console.log(err);
+
+        } else {
+            console.log(data);
+        }
+    });
+}
+
+// Bonus section - Log resuts to log.txt file
+function logResults(data) {
+    fs.appendFile("log.txt", data, (err) => {
+        if (err) {
+            return console.log(err);
         }
     });
 }
