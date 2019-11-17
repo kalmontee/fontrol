@@ -125,10 +125,11 @@ function whatItSays() {
             return console.log(err);
 
         } else {
+            // Display all the contents of data
             console.log(data);
-            movie();
-            spotify();
-            bandsInTown();
+
+            var dataArr = data.split(",");
+            console.log(dataArr);
         }
     });
 }
