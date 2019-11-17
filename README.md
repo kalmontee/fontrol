@@ -39,5 +39,3 @@ NodeJS
 
 ## Contributing
 Pull requests are welcome.
-
-## Video Demo
