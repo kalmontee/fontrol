@@ -4,6 +4,11 @@ LIRI is a Language Interpretation and Recognition Interface.
 
 The app will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
+
+## Technologies
+
+NodeJS
+
 ## Installation
 
 For the app to work the following installation needs to occur.
@@ -51,10 +56,6 @@ do-what-it-says
 
 ![Screenshot (66)](https://user-images.githubusercontent.com/52462582/69369436-106f0780-0c6a-11ea-9eab-1014fbe047c4.png)
 
-
-## Technologies
-
-NodeJS
 
 ## Contributing
 Pull requests are welcome.
