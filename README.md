@@ -56,6 +56,9 @@ do-what-it-says
 
 ![Screenshot (66)](https://user-images.githubusercontent.com/52462582/69369436-106f0780-0c6a-11ea-9eab-1014fbe047c4.png)
 
+## Video Demo
+
+To have a better glance you can check Liri.mp4 video walkthrough.
 
 ## Contributing
 Pull requests are welcome.
