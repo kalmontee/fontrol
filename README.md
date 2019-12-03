@@ -9,6 +9,8 @@ The app will search Spotify for songs, Bands in Town for concerts, and OMDB for 
 
 NodeJS
 
+Moment.js
+
 ## Installation
 
 For the app to work the following installation needs to occur.
